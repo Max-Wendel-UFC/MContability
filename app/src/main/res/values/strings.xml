@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">MContability</string>
+    <string name="title_home">Home</string>
+    <string name="title_home_1">Movimentações</string>
+    <string name="title_home_2">Você Não Possui Movimentações</string>
+    <string name="title_receitas">Receitas</string>
+    <string name="title_despesas">Despesas</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="adicionar">Adicionar</string>
+    <string name="criar_nova_movimenta_o">Criar Nova Movimentação</string>
+    <string name="concluido">Concluido</string>
+    <string name="valor">Valor</string>
+    <string name="nome">Nome</string>
+    <string name="em_andamento">Em Andamento</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="sobre">Sobre</string>
+</resources>

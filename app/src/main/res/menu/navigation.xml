@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+            android:id="@+id/navigation_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/title_home_1" android:visible="true"/>
+
+    <item
+            android:id="@+id/navigation_receitas"
+            android:icon="@drawable/ic_tab_receitas"
+            android:title="@string/title_receitas" android:visible="true"/>
+
+    <item
+            android:id="@+id/navigation_despesas"
+            android:icon="@drawable/ic_tab_despesas"
+            android:title="@string/title_despesas" android:visible="true"/>
+
+</menu>
