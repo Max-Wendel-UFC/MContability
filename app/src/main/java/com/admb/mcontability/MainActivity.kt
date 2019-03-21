@@ -11,10 +11,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import com.admb.mcontability.Model.Despesa
 import com.admb.mcontability.Model.Enums.Code
 import com.admb.mcontability.Model.Movimentacao
@@ -26,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     val listMovimentacao:MutableList<Movimentacao> = mutableListOf()
     lateinit var listViewMovimentacao: ListView
+
     var selected = 0
     var id = 1
     lateinit var adapter: ArrayAdapter<*>
@@ -43,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                message.setText(R.string.title_home)
+                message.setText(getHomeMessage())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_receitas -> {
@@ -82,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             val item = parent.getItemAtPosition(position) as Movimentacao
             selected = position
         }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -104,8 +103,9 @@ class MainActivity : AppCompatActivity() {
             apagarMovimentacao()
             true
         }
-        R.id.about -> {
-            Toast.makeText(this,"TODO",Toast.LENGTH_SHORT).show()
+        R.id.test -> {
+            val intent: Intent = Intent(this, TestActivity::class.java)
+            startActivity(intent)
             true
         }
         else -> {
@@ -210,6 +210,14 @@ class MainActivity : AppCompatActivity() {
             listMovimentacao.add(despesa)
             adapter.notifyDataSetChanged()
             id++
+        }
+    }
+
+    fun getHomeMessage():Int{
+        if(listMovimentacao.isEmpty()){
+            return R.string.title_home_2
+        }else{
+            return R.string.title_home_1
         }
     }
 }

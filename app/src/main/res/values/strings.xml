@@ -15,6 +15,9 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
     <string name="sobre">Sobre</string>
+    <string name="fun_es_testes">Funções Testes</string>
+    <string name="play_a_song">Play a Song</string>
+    <string name="teste_o_auto_complete">Teste o Auto Complete</string>
     <string-array name="descricao">
         <item>Salário</item>
         <item>Dívida Paga</item>

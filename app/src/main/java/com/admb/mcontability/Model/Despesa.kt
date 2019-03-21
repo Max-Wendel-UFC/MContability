@@ -11,6 +11,6 @@ class Despesa(
 ) :Movimentacao {
 
     override fun toString(): String {
-        return "-R$ "+valor.setScale(2).toPlainString()
+        return """-R$ ${valor.setScale(2).toPlainString()} ${nome}"""
     }
 }
