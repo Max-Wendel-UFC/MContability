@@ -45,6 +45,7 @@ class AddMovimentacaoActivity : AppCompatActivity(), AdapterView.OnItemSelectedL
         intent.putExtra("descricao", descricao)
         intent.putExtra("situacao", isComplete)
 
+
         setResult(Code.RESULT_ADD.code, intent)
         finish()
 

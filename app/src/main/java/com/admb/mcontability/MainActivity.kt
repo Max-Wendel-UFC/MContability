@@ -3,11 +3,14 @@ package com.admb.mcontability
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.design.widget.FloatingActionButton
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
@@ -26,6 +29,16 @@ class MainActivity : AppCompatActivity() {
     var selected = 0
     var id = 1
     lateinit var adapter: ArrayAdapter<*>
+
+    lateinit var fab_plus : FloatingActionButton
+    lateinit var fab_pay : FloatingActionButton
+    lateinit var fab_cash : FloatingActionButton
+
+    lateinit var fabOpen: Animation
+    lateinit var fabClose: Animation
+    lateinit var fabRClockWise: Animation
+    lateinit var fabRAntiClockWise: Animation
+    var isOpen:Boolean=false
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -57,6 +70,14 @@ class MainActivity : AppCompatActivity() {
         listViewMovimentacao.adapter = adapter
 //        listViewMovimentacao.setSelector(holo_green_light)
 
+        fab_plus = findViewById(R.id.plusActionButton)
+        fab_pay = findViewById(R.id.payActionButton)
+        fab_cash = findViewById(R.id.cashActionButton)
+        fabOpen = AnimationUtils.loadAnimation(applicationContext,R.anim.fab_open)
+        fabClose = AnimationUtils.loadAnimation(applicationContext,R.anim.fab_close)
+        fabRClockWise = AnimationUtils.loadAnimation(applicationContext,R.anim.rotate_clockwise)
+        fabRAntiClockWise = AnimationUtils.loadAnimation(applicationContext,R.anim.rotate_anticlockwise)
+
         listViewMovimentacao.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
             val item = parent.getItemAtPosition(position) as Movimentacao
             selected = position
@@ -72,7 +93,7 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem) = when (item.itemId) {
         R.id.add -> {
             val intent: Intent = Intent(this, AddMovimentacaoActivity::class.java)
-            startActivityForResult(intent, Code.REQUEST_ADD.code)
+            Toast.makeText(this,"TODO",Toast.LENGTH_SHORT).show()
             true
         }
         R.id.edit -> {
@@ -92,6 +113,24 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun onClickPlus(view: View){
+        if (isOpen){
+            fab_cash.startAnimation(fabClose)
+            fab_pay.startAnimation(fabClose)
+            fab_plus.startAnimation(fabRAntiClockWise)
+            fab_pay.isClickable = false
+            fab_cash.isClickable = false
+            isOpen = false
+        }else{
+            fab_cash.startAnimation(fabOpen)
+            fab_pay.startAnimation(fabOpen)
+            fab_plus.startAnimation(fabRClockWise)
+            fab_pay.isClickable = true
+            fab_cash.isClickable = true
+            isOpen = true
+        }
+    }
+
     fun apagarMovimentacao(){
         if (selected >= 0){
             listMovimentacao.removeAt(selected)
@@ -102,9 +141,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun onClickAddMovimentacao(view: View){
+    fun onClickAddReceita(view: View){
        val intent:Intent = Intent(this, AddMovimentacaoActivity::class.java)
-        startActivityForResult(intent, Code.REQUEST_ADD.code)
+        startActivityForResult(intent, Code.REQUEST_ADD_RECEITA.code)
+    }
+
+    fun onClickAddDespesa(view: View){
+        val intent = Intent(this,AddMovimentacaoActivity::class.java)
+        startActivityForResult(intent,Code.REQUEST_ADD_DESPESA.code)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -116,19 +160,26 @@ class MainActivity : AppCompatActivity() {
             """
                 .trimIndent()
 
-        if (requestCode == Code.REQUEST_ADD.code && resultCode == Code.REQUEST_ADD.code){
+        if (requestCode == Code.REQUEST_ADD_RECEITA.code && resultCode == Code.REQUEST_ADD_RECEITA.code){
 
-        }else if (requestCode == Code.REQUEST_EDIT.code && resultCode == Code.REQUEST_ADD.code){
+        }else if (requestCode == Code.REQUEST_EDIT.code && resultCode == Code.REQUEST_ADD_RECEITA.code){
             //TODO
         }
 
         if (data != null) {
             if(data.extras!=null){
+
                 val nome:String = data.extras.get("nome") as String
-                val valor:String = data.extras.get("valor") as String
                 val descricao:String = data.extras.get("descricao") as String
                 val situacao:String = data.extras.get("situacao") as String
+                var valor:String
 
+                if (requestCode == Code.REQUEST_ADD_RECEITA.code){
+                    valor = "-"
+                    valor += data.extras.get("valor") as String
+                }else{
+                    valor = data.extras.get("valor") as String
+                }
                 resultado +=
                     """
                         - ${nome} - ${valor} - ${descricao} - ${situacao}
