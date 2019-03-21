@@ -9,7 +9,7 @@ class Receita(override val id: Long,
               override val situacao: String
 ) :Movimentacao{
 
-    override fun getFormatedValue():String {
+    override fun toString():String {
         return "+R$ "+valor.setScale(2).toPlainString()
     }
 

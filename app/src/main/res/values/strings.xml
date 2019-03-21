@@ -15,4 +15,11 @@
     <string name="editar">Editar</string>
     <string name="excluir">Excluir</string>
     <string name="sobre">Sobre</string>
+    <string-array name="descricao">
+        <item>Salário</item>
+        <item>Dívida Paga</item>
+        <item>Internet</item>
+        <item>Conta de Luz</item>
+        <item>Conta de Água</item>
+    </string-array>
 </resources>

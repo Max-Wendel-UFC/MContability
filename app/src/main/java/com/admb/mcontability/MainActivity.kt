@@ -21,7 +21,7 @@ import java.math.BigDecimal
 
 class MainActivity : AppCompatActivity() {
 
-    val listMovimentacao:MutableList<Movimentacao> = mutableListOf<Movimentacao>()
+    val listMovimentacao:MutableList<Movimentacao> = mutableListOf()
     lateinit var listViewMovimentacao: ListView
     var selected = 0
     var id = 1

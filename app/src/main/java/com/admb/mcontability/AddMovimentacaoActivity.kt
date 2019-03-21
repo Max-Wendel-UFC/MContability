@@ -4,16 +4,18 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
-import android.widget.EditText
-import android.widget.RadioButton
+import android.widget.*
 import com.admb.mcontability.Model.Enums.Code
 
-class AddMovimentacaoActivity : AppCompatActivity() {
+class AddMovimentacaoActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     lateinit var edtnome : EditText
     lateinit var  edtvalor : EditText
-    lateinit var  edtdescricao : EditText
+    lateinit var  sdescricao : Spinner
     lateinit var  rbisComplete : RadioButton
+    var descricao = ""
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,9 +23,13 @@ class AddMovimentacaoActivity : AppCompatActivity() {
 
         edtnome = findViewById(R.id.idEditTextNome)
         edtvalor = findViewById(R.id.idEditTextValor)
-        edtdescricao = findViewById(R.id.idEditTextDescricao)
+        sdescricao = findViewById(R.id.spinner1)
         rbisComplete = findViewById(R.id.idRadioButton)
 
+        val adapter: ArrayAdapter<CharSequence> = ArrayAdapter.createFromResource(this,R.array.descricao,android.R.layout.simple_spinner_item)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        sdescricao.adapter = adapter
+        sdescricao.onItemSelectedListener = this
     }
 
     fun adicionarMovimentacao(view: View){
@@ -32,7 +38,6 @@ class AddMovimentacaoActivity : AppCompatActivity() {
 
         val nome = if (!edtnome.text.toString().equals("")) edtnome.text.toString() else "Sem Nome"
         val valor = if (!edtvalor.text.toString().equals(""))edtvalor.text.toString() else "0.0"
-        val descricao = if (!edtdescricao.text.toString().equals("")) edtdescricao.text.toString() else "(sem descrição)"
         val isComplete = rbisComplete.isChecked.toString()
 
         intent.putExtra("nome", nome)
@@ -48,6 +53,14 @@ class AddMovimentacaoActivity : AppCompatActivity() {
     fun cancelarMovimentacao(view:View){
         setResult(Code.CANCEL.code)
         finish()
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        descricao = parent!!.getItemAtPosition(position).toString()
     }
 
 }

@@ -9,5 +9,5 @@ interface Movimentacao{
     val descricao:String
     val situacao:String
 
-    fun getFormatedValue():String
+    override fun toString():String
 }
