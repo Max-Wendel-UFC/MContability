@@ -18,6 +18,8 @@
     <string name="fun_es_testes">Funções Testes</string>
     <string name="play_a_song">Play a Song</string>
     <string name="teste_o_auto_complete">Teste o Auto Complete</string>
+    <string name="play_song">Play Song</string>
+    <string name="pause">Pause</string>
     <string-array name="descricao">
         <item>Salário</item>
         <item>Dívida Paga</item>

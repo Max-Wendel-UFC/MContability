@@ -13,24 +13,44 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="8dp">
         <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" android:id="@+id/idPlaySongLayout">
-            <Switch
-                    android:text="@string/play_a_song"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/togglePalySong"
-            />
+            <Button
+                    android:text="@string/play_song"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonPlay" android:layout_weight="1"
+                    android:onClick="onClickPlaySong"
+                    style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
+                    android:textColor="@color/design_default_color_primary_dark"/>
+            <Button
+                    android:text="@string/pause"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:id="@+id/buttonStop" android:layout_weight="1"
+                    android:onClick="onClickStopSong"
+                    style="@android:style/Widget.Material.Light.Button.Borderless.Colored"/>
         </LinearLayout>
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" android:id="@+id/idAutoCompleteLayout">
+                android:layout_height="match_parent"
+                android:id="@+id/idAutoCompleteLayout"
+        >
             <AutoCompleteTextView
                     android:text="@string/teste_o_auto_complete"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" android:id="@+id/autoCompleteTextView"
             />
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:id="@+id/idToggleButtonLayout">
+            <Switch
+                    android:text="@string/play_a_song"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:id="@+id/togglePalySong"
+                    android:onClick="onToggle"/>
         </LinearLayout>
         <RelativeLayout
                 android:layout_width="match_parent"
