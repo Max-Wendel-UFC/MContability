@@ -81,7 +81,13 @@ class MainActivity : AppCompatActivity() {
             selected = position
         }
 
+        listViewMovimentacao.setOnItemLongClickListener { parent, view, position, id ->
+            Toast.makeText(this, "Long click detectado!", Toast.LENGTH_SHORT).show()
+            return@setOnItemLongClickListener true
+        }
+
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
